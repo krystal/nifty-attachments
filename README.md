@@ -6,8 +6,6 @@ them to your database.
 
 * All attachment data is stored in your database 
 * Attachments are accessed at /attachment/{token}/{filename}. Middleware is provided to provide endpoint. 
-* There is currently no validation in place however this will be added in a future version.
-
 
 ## Example Usage
 
@@ -61,3 +59,9 @@ You can upload attachments straight from forms into your models by using the
 <% end %>
 ```
 
+## Coming Soon
+
+There are a few extra things which need adding to this library:
+
+* A test suite
+* Validations
