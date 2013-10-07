@@ -52,7 +52,7 @@ You can upload attachments straight from forms into your models by using the
 `_file` accessor which is provided. 
 
 ```erb
-<% form_for @person do |f| %>
+<% form_for @person, :html => {:multipart => true} do |f| %>
   <%= f.file_field :profile_picture_file %>
   <%= f.file_field :cover_photo_file %>
   <%= f.submit "Upload Attachments" %>
