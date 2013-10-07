@@ -23,7 +23,7 @@ module Nifty
             has_many :nifty_attachments, :as => :parent, :dependent => :destroy, :class_name => 'Nifty::Attachments::Attachment'
           end
           
-          has_one name, -> { select(:id, :token, :parent_id, :parent_type, :file_name, :file_type).where(:role => name) }, :class_name => 'Nifty::Attachments::Attachment', :as => :parent
+          has_one name, -> { select(:id, :token, :digest, :parent_id, :parent_type, :file_name, :file_type).where(:role => name) }, :class_name => 'Nifty::Attachments::Attachment', :as => :parent
 
           define_method "#{name}_file" do
             instance_variable_get("@#{name}_file")

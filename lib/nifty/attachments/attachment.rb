@@ -16,6 +16,7 @@ module Nifty
       validates :file_name, :presence => true
       validates :file_type, :presence => true
       validates :data, :presence => true
+      validates :digest, :presence => true
       validates :token, :presence => true, :uniqueness => true
   
       # All attachments should have a token assigned to this
@@ -28,6 +29,7 @@ module Nifty
           self.data = self.uploaded_file.tempfile.read
           self.file_name = self.uploaded_file.original_filename
           self.file_type = self.uploaded_file.content_type
+          self.digest = Digest::MD5.hexdigest(self.data)
         end
       end
   
