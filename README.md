@@ -51,7 +51,7 @@ people = Person.includes(:profile_picture)
 You can upload attachments straight from forms into your models by using the
 `_file` accessor which is provided. 
 
-```html
+```erb
 <% form_for @person do |f| %>
   <%= f.file_field :profile_picture_file %>
   <%= f.file_field :cover_photo_file %>
