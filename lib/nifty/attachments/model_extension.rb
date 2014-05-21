@@ -4,7 +4,7 @@ module Nifty
 
       def self.included(base)
         base.extend ClassMethods
-        base.before_save do
+        base.after_save do
           if @pending_attachments
             @pending_attachments.each do |pa|
               old_attachments = self.nifty_attachments.where(:role => pa[:role]).pluck(:id)
