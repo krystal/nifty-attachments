@@ -5,6 +5,10 @@ module Nifty
       def self.included(base)
         base.extend ClassMethods
         base.after_save do
+          if @pending_attachment_deletions
+            self.nifty_attachments.where(:role => @pending_attachment_deletions).destroy_all
+          end
+
           if @pending_attachments
             @pending_attachments.each do |pa|
               old_attachments = self.nifty_attachments.where(:role => pa[:role]).pluck(:id)
@@ -36,6 +40,18 @@ module Nifty
               @pending_attachments << {:role => name, :file => file}
             else
               nil
+            end
+          end
+
+          define_method "#{name}_delete" do
+            instance_variable_get("@#{name}_delete")
+          end
+
+          define_method "#{name}_delete=" do |delete|
+            instance_variable_set("@#{name}_delete", delete)
+            unless delete.blank?
+              @pending_attachment_deletions ||= []
+              @pending_attachment_deletions << name
             end
           end
         end
