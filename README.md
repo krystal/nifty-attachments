@@ -4,8 +4,8 @@ Nifty attachments allow you to attach files/images/documents to Active Record mo
 with ease. Just define which attachments you wish to add and you can easily upload
 them to your database.
 
-* All attachment data is stored in your database 
-* Attachments are accessed at /attachment/{token}/{filename}. Middleware is provided to provide endpoint. 
+* All attachment data is stored in your database
+* Attachments are accessed at /attachment/{token}/{filename}. Middleware is provided to provide endpoint.
 
 ## Example Usage
 
@@ -32,7 +32,7 @@ class Person < ActiveRecord::Base
 end
 ```
 
-You can access any of your attachments easily through the methods as shown 
+You can access any of your attachments easily through the methods as shown
 below.
 
 ```ruby
@@ -49,7 +49,7 @@ people = Person.includes(:profile_picture)
 ```
 
 You can upload attachments straight from forms into your models by using the
-`_file` accessor which is provided. 
+`_file` accessor which is provided.
 
 ```erb
 <% form_for @person, :html => {:multipart => true} do |f| %>
