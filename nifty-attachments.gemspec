@@ -9,5 +9,6 @@ Gem::Specification.new do |s|
   s.files         = Dir.glob("{lib}/**/*")
   s.require_paths = ["lib"]
   s.authors       = ["Adam Cooke"]
-  s.email         = ["adam@niftyware.io"]
+  s.email         = ["adam@atechmedia.com"]
+  s.licenses      = ['MIT']
 end
