@@ -59,6 +59,38 @@ You can upload attachments straight from forms into your models by using the
 <% end %>
 ```
 
+## Additional processing
+
+If additional processing is required for an uploaded file, this can be acheived by passing a block to the `attachment` method.
+
+```ruby
+attachment :image do |attachment|
+  # Do your additional processing on this attachment
+  # This might include making thumbnails of an image etc...
+end
+```
+
+By default, all processing will happen syncronously which may not be desirable if the processing will take time. To background the processing automatically, you can request the assistance of a worker. You need to use your own worker system to do this, an example is provided below.
+
+```ruby
+# Configure how jobs should be queued
+Nifty::Attachments::Processor.background do |attachment|
+  ProcessAttachmentJob.queue(:attachment_id => attachment.id)
+end
+
+# Define a job (if you don't preload your app, be sure to get the parent initialized before trying to run any processing
+# otherwise the processors won't have registered),
+class ProcessAttachmentJob < Jobster::Job
+  def perform
+    if attachment = Nifty::Attachments::Attachment.includes(:parent).find(params['attachment_id'])
+      attachment.processor.process
+    end
+  end
+end
+```
+
+Once you have registered a block for queueing (using `background`), all attachments for the application will be processed in the background.
+
 ## Coming Soon
 
 There are a few extra things which need adding to this library:

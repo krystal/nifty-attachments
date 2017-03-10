@@ -48,6 +48,11 @@ module Nifty
         file_type =~ /\Aimage\//
       end
 
+      # Return a processor for this attachment
+      def processor
+        @processor ||= Processor.new(self)
+      end
+
     end
   end
 end
